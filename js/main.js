@@ -1,3 +1,5 @@
+import { renderThumbnails } from './thumbnail.js';
+
 const PHOTOS_COUNT = 25;
 const LIKES_MIN = 15;
 const LIKES_MAX = 200;
@@ -78,3 +80,5 @@ const createPhoto = (index) => ({
 });
 
 export const photos = Array.from({ length: PHOTOS_COUNT }, (_, index) => createPhoto(index));
+
+renderThumbnails(photos);
