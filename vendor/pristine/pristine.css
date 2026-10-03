@@ -1,0 +1,12 @@
+.pristine-error {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #e15b4c;
+}
+
+.img-upload__field-wrapper--error .text__hashtags,
+.img-upload__field-wrapper--error .text__description {
+  border-color: #e15b4c;
+}

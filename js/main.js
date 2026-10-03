@@ -1,3 +1,4 @@
+import './form.js';
 import { renderThumbnails } from './thumbnail.js';
 
 const PHOTOS_COUNT = 25;
