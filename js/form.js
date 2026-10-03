@@ -1,7 +1,11 @@
+import { uploadPhoto } from './api.js';
+import { showErrorMessage, showSuccessMessage } from './message.js';
+
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
 const uploadOverlay = uploadForm.querySelector('.img-upload__overlay');
 const uploadCancel = uploadForm.querySelector('.img-upload__cancel');
+const uploadSubmit = uploadForm.querySelector('.img-upload__submit');
 const hashtagsField = uploadForm.querySelector('.text__hashtags');
 const descriptionField = uploadForm.querySelector('.text__description');
 
@@ -64,10 +68,25 @@ const pristine = new Pristine(uploadForm, {
 pristine.addValidator(hashtagsField, () => getHashtagsError() === '', getHashtagsError);
 pristine.addValidator(descriptionField, () => descriptionField.value.length <= MAX_DESCRIPTION_LENGTH, `Длина комментария не может быть больше ${MAX_DESCRIPTION_LENGTH} символов`);
 
-const onFormSubmit = (evt) => {
+const onFormSubmit = async (evt) => {
+  evt.preventDefault();
+
   if (!pristine.validate()) {
-    evt.preventDefault();
+    return;
   }
+
+  uploadSubmit.disabled = true;
+
+  try {
+    await uploadPhoto(new FormData(uploadForm));
+
+    closeForm();
+    showSuccessMessage();
+  } catch (error) {
+    showErrorMessage('Не удалось отправить форму. Попробуйте ещё раз');
+  }
+
+  uploadSubmit.disabled = false;
 };
 
 document.addEventListener('keydown', onDocumentKeyDown);
