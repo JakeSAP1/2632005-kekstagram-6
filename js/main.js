@@ -1,3 +1,4 @@
+import './effects.js';
 import './form.js';
 import { renderThumbnails } from './thumbnail.js';
 
