@@ -20,6 +20,8 @@ export const renderThumbnails = (photos) => {
     fragment.appendChild(createThumbnail(photo));
   });
 
-  container.textContent = '';
+  container.querySelectorAll('.picture').forEach((thumbnail) => {
+    thumbnail.remove();
+  });
   container.appendChild(fragment);
 };
