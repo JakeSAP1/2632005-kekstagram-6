@@ -8,6 +8,8 @@ const uploadCancel = uploadForm.querySelector('.img-upload__cancel');
 const uploadSubmit = uploadForm.querySelector('.img-upload__submit');
 const hashtagsField = uploadForm.querySelector('.text__hashtags');
 const descriptionField = uploadForm.querySelector('.text__description');
+const previewImage = document.querySelector('.img-upload__preview img');
+const effectPreviews = document.querySelectorAll('.effects__preview');
 
 const HASHTAG_PATTERN = /^#[a-zа-яё0-9]{1,19}$/i;
 const MAX_HASHTAGS_COUNT = 5;
@@ -89,7 +91,24 @@ const onFormSubmit = async (evt) => {
   uploadSubmit.disabled = false;
 };
 
+const setPreviewImage = (file) => {
+  const imageUrl = URL.createObjectURL(file);
+
+  previewImage.src = imageUrl;
+  effectPreviews.forEach((preview) => {
+    preview.style.backgroundImage = `url("${imageUrl}")`;
+  });
+};
+
+const onUploadInputChange = () => {
+  if (uploadInput.files.length > 0) {
+    setPreviewImage(uploadInput.files[0]);
+  }
+
+  openForm();
+};
+
 document.addEventListener('keydown', onDocumentKeyDown);
-uploadInput.addEventListener('change', openForm);
+uploadInput.addEventListener('change', onUploadInputChange);
 uploadCancel.addEventListener('click', closeForm);
 uploadForm.addEventListener('submit', onFormSubmit);
