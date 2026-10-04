@@ -1,3 +1,4 @@
+import { openBigPicture } from './big-picture.js';
 import { renderThumbnails } from './thumbnail.js';
 
 const PHOTOS_COUNT = 25;
@@ -81,4 +82,4 @@ const createPhoto = (index) => ({
 
 export const photos = Array.from({ length: PHOTOS_COUNT }, (_, index) => createPhoto(index));
 
-renderThumbnails(photos);
+renderThumbnails(photos, openBigPicture);
