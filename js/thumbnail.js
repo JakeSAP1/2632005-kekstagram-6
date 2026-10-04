@@ -20,5 +20,6 @@ export const renderThumbnails = (photos) => {
     fragment.appendChild(createThumbnail(photo));
   });
 
+  container.textContent = '';
   container.appendChild(fragment);
 };
